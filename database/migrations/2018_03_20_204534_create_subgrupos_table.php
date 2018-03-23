@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServ2Table extends Migration
+class CreateSubgruposTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateServ2Table extends Migration
      */
     public function up()
     {
-        Schema::create('serv2', function (Blueprint $table) {
+        Schema::create('subgrupos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('codserv1')->unsigned();
-            $table->foreign('codserv1')->references('codigo')->on('serv1');
-            $table->string('descserv1');
-            $table->integer('codigo')->unsigned();
-            $table->decimal('valor', 8, 2);
+            $table->integer('id_grupo');
+            $table->integer('id_subgrupo');
             $table->string('descricao');
+            $table->decimal('valor', 8, 2);
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateServ2Table extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('serv2');
+        Schema::dropIfExists('subgrupos');
     }
 }

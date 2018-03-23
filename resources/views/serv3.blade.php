@@ -1,63 +1,7 @@
 @extends('welcome')
 
 @section('content')
-<style type="text/css">
-	.form-inline{
-		padding-left: 30px;
-	}
-	.panel-heading h3 {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: normal;
-    width: 80%;
-    padding-top: 8px;
-
-    .tab {
-    float: left;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-    width: 30%;
-    height: 300px;
-}
-
-/* Style the buttons inside the tab */
-.tab button {
-    display: block;
-    background-color: inherit;
-    color: black;
-    padding: 22px 16px;
-    width: 100%;
-    border: none;
-    outline: none;
-    text-align: left;
-    cursor: pointer;
-    transition: 0.3s;
-    font-size: 17px;
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-    background-color: #ddd;
-}
-
-/* Create an active/current "tab button" class */
-.tab button.active {
-    background-color: #ccc;
-}
-
-/* Style the tab content */
-.tabcontent {
-    float: left;
-    padding: 0px 12px;
-    border: 1px solid #ccc;
-    width: 70%;
-    border-left: none;
-    height: 300px;
-}
-}	
-</style>
-
+	
 	<div class="container">
 	<div class="panel panel-default">
 	<div class="panel-heading"><h3 class="panel-title pull-left">
@@ -128,23 +72,23 @@
 									{{$serv->descserv2}}
 								</td>
 								<td>
-									{{$serv->codigo}}
+									{{$serv->codserv3}}
 								</td>
 
 								<td>
-								{{$serv->descricao}}
+								{{$serv->descserv3}}
 								</td>
 
 								<td>
-									{{$serv->valor}}
+									{{$serv->valorserv3}}
 								</td>
 						
 								<td>
-									<a href="{{route('serv3.edit',['id'=> $serv->codigo])}}" class="btn btn-xs btn-success">Editar</a>
+									<a href="{{route('serv3.edit',['id'=> $serv->codserv3])}}" class="btn btn-xs btn-success">Editar</a>
 								</td>
 
 								<td>
-									<a href="{{route('serv3.delete',['id'=> $serv->codigo])}}" class="btn btn-xs btn-danger">Excluir</a>
+									<a href="{{route('serv3.delete',['id'=> $serv->codserv3])}}" class="btn btn-xs btn-danger">Excluir</a>
 								</td>
 
 							</tr>
@@ -153,7 +97,8 @@
 					@endforeach
 
 				</table>
-			
+
+		
 		</div>
 		
 	</div>

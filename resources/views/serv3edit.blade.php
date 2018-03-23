@@ -6,7 +6,7 @@
 		padding-left: 30px;
 	}
 </style>
-<form action="{{route('serv3.store')}}" method="post">
+<form action="{{route('serv3.update',['id'=> $servicos3->codserv3])}}" method="post">
 	<div class="container">
 	<div class="panel panel-default">
 	<div class="panel-heading">Editar Serviço Nv.3</div>
@@ -25,11 +25,11 @@
 			
 		</select>
 		<label for="nome">Código:</label>
-		<input type="text" class="form-control" maxlength="10" size="10" name="codigo" value="{{$servicos3->codigo}}">
+		<input type="text" class="form-control" maxlength="10" size="10" name="codigo" value="{{$servicos3->codserv3}}">
 		<label for="nome">Descrição:</label>
-		<input type="text" name="descricao" class="form-control" value="{{$servicos3->descricao}}">
+		<input type="text" name="descricao" class="form-control" value="{{$servicos3->descserv3}}">
 		<label for="nome">Valor:</label>
-		<input type="text" name="valor" class="form-control" value="{{$servicos3->valor}}">
+		<input type="text" name="valor" class="form-control" value="{{$servicos3->valorserv3}}">
 		<button type="submit" class="btn btn-btn-success">Cadastrar</button>
 		<p></p>
 	</div>

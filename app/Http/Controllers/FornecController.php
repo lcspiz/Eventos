@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Fornecedores;
 use App\ContatosFornec;
 use Session;
-
+use Illuminate\Support\Facades\Input;
 
 class FornecController extends Controller
 {
@@ -19,7 +19,7 @@ class FornecController extends Controller
     public function index()
     {
         //
-        $fornecedores = DB::table('fornecedores')->get();
+        $fornecedores = DB::table('fornecedores')->orderBy('id')->get();
 
         return view('fornecedor')->with('fornecedores',$fornecedores);
     }
@@ -96,10 +96,12 @@ class FornecController extends Controller
     public function edit($id)
     {
         //
+        $servfornec = DB::table('serv_fornec')->where('codfornec',"=" ,$id)->orderBy('codserv1','ASC')->orderBy('codserv2','ASC')->orderBy('codserv3','ASC')->get();
+        
         $fornecedit = Fornecedores::where('id','=',$id)->first();
         $contatos =  ContatosFornec::where('id_fornec',"=",$id)->get();
 
-        return view('fornecedit')->with('fornecedor',$fornecedit)->with('contatos', $contatos);
+        return view('fornecedit')->with('fornecedor',$fornecedit)->with('contatos', $contatos)->with('servfornec',$servfornec);
         
     }
 
@@ -137,6 +139,7 @@ class FornecController extends Controller
             $fornecedit->site = $request->site;
             $fornecedit->observacao = $request->observacao;
             $fornecedit->titular = $request->titular;
+            $fornecedit->tipo = $request->tipo;
             $fornecedit->cpfconta = $request->cpfconta;
 
             $fornecedit->save();
@@ -164,7 +167,7 @@ class FornecController extends Controller
         return redirect()->route('fornecedores');
     }
 
-    public function searchMatch(Request $request){
+ public function searchMatch(Request $request){
        $query = $_GET['query'];
 
        $searchString = '%'.$query.'%';
@@ -184,4 +187,51 @@ public function search(Request $request){
 
 
 }
+
+public function pesquisafornec(Request $request){
+
+    $serv1 = DB::table('serv1')->orderBy('codigo')->get();
+    $uf = DB::table('fornecedores')->orderBy('uf')->get()->unique('uf');
+    $cidades = DB::table('fornecedores')->orderBy('cidade')->get()->unique('cidade');
+
+    if($request->codserv3 == null){
+        $codserv1 = $request->codserv1;
+        $codserv2 = $request->codserv2;
+        $codserv3 = $request->codserv3;
+        $fornecidade = $request->cidade;
+        $fornecuf = $request->uf;
+
+        $fornecsearch = collect(DB::select(DB::raw("SELECT fornecedores.id, fornecedores.nome , fornecedores.uf, fornecedores.cidade, serv_fornec.codserv1, serv_fornec.codserv2, serv_fornec.codserv3 from fornecedores inner join serv_fornec on fornecedores.id = serv_fornec.codfornec WHERE codserv1 = $codserv1 and codserv2 = $codserv2 and codserv3 IS NULL and fornecedores.cidade LIKE '$fornecidade' and fornecedores.uf LIKE '$fornecuf' ")));
+
+        return view('selecionafornec',['fornecedores' => $fornecsearch, 'servicos1' => $serv1,'servicos1' => $serv1, 'ufs' => $uf, 'cidades' => $cidades,'request' => $request]);
+    }
+    else{
+        $codserv1 = $request->codserv1;
+        $codserv2 = $request->codserv2;
+        $codserv3 = $request->codserv3;
+        $fornecidade = $request->cidade;
+        $fornecuf = $request->uf;
+
+
+
+        $fornecsearch = collect(DB::select(DB::raw("SELECT fornecedores.id, fornecedores.nome , fornecedores.uf, fornecedores.cidade, serv_fornec.codserv1, serv_fornec.codserv2, serv_fornec.codserv3 from fornecedores inner join serv_fornec on fornecedores.id = serv_fornec.codfornec WHERE codserv1 = $codserv1 and codserv2 = $codserv2 and codserv3 = $codserv3 and fornecedores.cidade LIKE '$fornecidade' and fornecedores.uf LIKE '$fornecuf' ")));
+
+        return view('selecionafornec',['fornecedores' => $fornecsearch, 'servicos1' => $serv1,'servicos1' => $serv1, 'ufs' => $uf, 'cidades' => $cidades,'request' => $request]);
+
+    }  
+    
+}
+
+public function selecionafornec(){
+    $serv1 = DB::table('serv1')->orderBy('codigo')->get();
+
+    $uf = DB::table('fornecedores')->orderBy('uf')->get()->unique('uf');
+    $cidades = DB::table('fornecedores')->orderBy('cidade')->get()->unique('cidade');
+
+    $fornec = [];
+
+    return view('selecionafornec',['fornecedores' => $fornec, 'servicos1' => $serv1, 'ufs' => $uf, 'cidades' => $cidades]);
+}
+
+
 }

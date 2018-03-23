@@ -267,6 +267,65 @@ Route::get('fornecedor/contato/delete/{id}', [
 		'as' => 'contato_fornecedor.delete'
 ]);
 
+//Rotas de Serviços de Fornecedores
+
+Route::get('fornecedor/servicos/{idfornec}', [
+
+		'uses' => 'ServFornecController@index',
+		'as' => 'servico_fornecedor.index'
+]);
+
+Route::post('fornecedor/servicos/store/{idfornec}/{id}', [
+
+		'uses' => 'ServFornecController@store3',
+		'as' => 'servico_fornecedor.store3'
+]);
+
+Route::post('fornecedor/servicos/store2/{idfornec}/{id}', [
+
+		'uses' => 'ServFornecController@store2',
+		'as' => 'servico_fornecedor.store2'
+]);
+
+Route::get('fornecedor/servicos/delete/{idfornec}/{id}', [
+
+		'uses' => 'ServFornecController@delete3',
+		'as' => 'servico_fornecedor.delete3'
+]);
+
+Route::get('fornecedor/servicos/delete2/{idfornec}/{id}', [
+
+		'uses' => 'ServFornecController@delete2',
+		'as' => 'servico_fornecedor.delete2'
+]);
+
+Route::get('fornecedor/servicos/search/{id}', [
+
+		'uses' => 'ServFornecController@searchMatch',
+		'as' => 'servico_fornecedor.searchMatch'
+]);
+
+Route::get('fornecedor/servicos/pesquisa/{id}', [
+
+		'uses' => 'ServFornecController@search',
+		'as' => 'servico_fornecedor.pesquisa'
+]);
+
+Route::get('fornecedor/selecionar/', [
+
+		'uses' => 'FornecController@selecionafornec',
+		'as' => 'fornecedor.selecionafornec'
+]);
+
+Route::get('fornecedor/selecionar/pesquisa', [
+
+		'uses' => 'FornecController@pesquisafornec',
+		'as' => 'fornecedor.pesquisafornec'
+]);
+
+
+
+
 //Rotas de Serviço Nv1
 
 Route::get('serv1/', [
@@ -315,6 +374,8 @@ Route::get('serv2/', [
 ]);
 
 Route::get('serv2/get/{id}', ['uses' => 'Serv3Controller@getNv2']);
+
+Route::get('serv3/get/{id}', ['uses' => 'Serv3Controller@getNv3']);
 
 
 Route::get('serv2/create', [
@@ -377,4 +438,169 @@ Route::get('serv3/delete/{id}', [
 
 		'uses' => 'Serv3Controller@delete',
 		'as' => 'serv3.delete'
+]);
+
+Route::post('serv3/update/{id}', [
+
+		'uses' => 'Serv3Controller@update',
+		'as' => 'serv3.update'
+]);
+
+
+//rotas de teste
+
+Route::get('test', [
+
+		'uses' => 'Serv3Controller@test',
+		'as' => 'serv3.test'
+]);
+
+Route::get('test2', [
+
+		'uses' => 'Serv3Controller@test2',
+		'as' => 'serv3.test2'
+]);
+
+//rotas de Casting
+
+Route::get('castings/', [
+
+		'uses' => 'CastingController@index',
+		'as' => 'castings'
+]);
+
+Route::post('casting/store', [
+
+		'uses' => 'CastingController@store',
+		'as' => 'casting.store'
+]);
+
+Route::get('casting/create', [
+
+		'uses' => 'CastingController@create',
+		'as' => 'casting.create'
+]);
+
+Route::get('casting/edit/{id}', [
+
+		'uses' => 'CastingController@edit',
+		'as' => 'casting.edit'
+]);
+
+Route::post('casting/update/{id}', [
+
+		'uses' => 'CastingController@update',
+		'as' => 'casting.update'
+]);
+
+Route::post('castingvalor/update/{id}', [
+
+		'uses' => 'CastingController@updatevalor',
+		'as' => 'casting.updatevalor'
+]);
+
+Route::get('casting/delete/{id}', [
+
+		'uses' => 'CastingController@destroy',
+		'as' => 'casting.delete'
+]);
+
+Route::get('casting/search/', [
+
+		'uses' => 'CastingController@searchMatch',
+		'as' => 'casting.searchMatch'
+]);
+
+Route::get('casting/pesquisa/', [
+
+		'uses' => 'CastingController@search',
+		'as' => 'casting.pesquisa'
+]);
+
+Route::get('casting/selecionar/', [
+
+		'uses' => 'CastingController@selecionacasting',
+		'as' => 'casting.selecionacasting'
+]);
+
+Route::get('casting/selecionar/pesquisa', [
+
+		'uses' => 'CastingController@pesquisacasting',
+		'as' => 'casting.pesquisacasting'
+]);
+
+//rotas de Grupos
+Route::get('grupos/', [
+
+		'uses' => 'GruposController@index',
+		'as' => 'grupos'
+]);
+
+Route::get('grupos/create', [
+
+		'uses' => 'GruposController@create',
+		'as' => 'grupos.create'
+]);
+
+Route::post('grupos/store', [
+
+		'uses' => 'GruposController@store',
+		'as' => 'grupos.store'
+]);
+
+Route::get('grupos/edit/{id}', [
+
+		'uses' => 'GruposController@edit',
+		'as' => 'grupos.edit'
+]);
+
+Route::post('grupos/update/{id}', [
+
+		'uses' => 'GruposController@update',
+		'as' => 'grupos.update'
+]);
+
+Route::get('grupos/delete/{id}', [
+
+		'uses' => 'GruposController@delete',
+		'as' => 'grupos.delete'
+]);
+
+//rotas de sub grupos
+
+
+Route::get('subgrupos/', [
+
+		'uses' => 'SubGruposController@index',
+		'as' => 'subgrupos'
+]);
+
+Route::get('subgrupos/create', [
+
+		'uses' => 'SubGruposController@create',
+		'as' => 'subgrupos.create'
+]);
+
+Route::post('subgrupos/store', [
+
+		'uses' => 'SubGruposController@store',
+		'as' => 'subgrupos.store'
+]);
+
+Route::get('subgrupos/edit/{id}', [
+
+		'uses' => 'SubGruposController@edit',
+		'as' => 'subgrupos.edit'
+]);
+
+Route::post('subgrupos/update/{id}', [
+
+		'uses' => 'SubGruposController@update',
+		'as' => 'subgrupos.update'
+]);
+
+Route::get('subgrupos/delete/{id}', [
+
+		'uses' => 'SubGruposController@delete',
+		'as' => 'subgrupos.delete'
 ]);

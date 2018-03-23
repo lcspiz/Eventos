@@ -13,13 +13,20 @@
     width: 80%;
     padding-top: 8px;
 }	
+
+.mygrid-wrapper-div {
+    overflow: scroll;
+    height: 400px;
+}
 </style>
 
 	<div class="container">
 	<div class="panel panel-default">
 	<div class="panel-heading"><h3 class="panel-title pull-left">
 					Manutenção de Fornecedores</h3>
-	 <a href="{{route('fornecedor.create')}}" type="button" class="btn btn-default pull-right">Novo Fornecedor</a>
+	 <a href="{{route('fornecedor.create')}}" type="button" class="btn btn-success pull-right">
+	 	<span class="glyphicon glyphicon-plus"></span> Novo Fornecedor</a>
+        <div class="clearfix"></div>
         <div class="clearfix"></div>
     </div>
 <p></p>
@@ -27,7 +34,8 @@
 <form class="form-inline" action="{{route('fornecedor.pesquisa')}}" style="float:left;">
 		<label for="nome">Código:</label>
 		<input type="numeric" class="form-control" type="submit" name="codigo">
-		<button type="submit" class="btn btn-btn-success">Pesquisar</button>
+		<button type="submit" class="btn btn-info">
+			<span class="glyphicon glyphicon-search"></span> Pesquisar</button>
 		&nbsp;
 </form>
 
@@ -35,13 +43,12 @@
 <form class="form-inline" action="{{route('fornecedor.searchMatch')}}">
 		<label for="nome">Nome, CNPJ, Fantasia:</label>
 		<input type="text" type="submit" name="query" class="form-control">
-		<button type="submit" class="btn btn-btn-success">Pesquisar</button>
+		<button type="submit" class="btn btn-info">
+			<span class="glyphicon glyphicon-search"></span> Pesquisar</button>
 </form>
-
-
 		<div class="panel-body">
-
-			<table class="table table-hover">
+			<div class="mygrid-wrapper-div">
+			<table class="table table-striped">
 				
 					<thead>
 						<th>
@@ -109,11 +116,11 @@
 								</td>
 
 								<td>
-									<a href="{{route('fornecedor.edit',['id'=> $fornecedor->id])}}" class="btn btn-xs btn-success">Editar</a>
+									<a href="{{route('fornecedor.edit',['id'=> $fornecedor->id])}}" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-edit"></span> Editar</a>
 								</td>
 
 								<td>
-									<a href="{{route('fornecedor.delete',['id'=> $fornecedor->id])}}" class="btn btn-xs btn-danger" onclick="return confirm('Deseja excluir fornecedor: {{$fornecedor->nome}}')">Excluir</a>
+									<a href="{{route('fornecedor.delete',['id'=> $fornecedor->id])}}" class="btn btn-xs btn-danger" onclick="return confirm('Deseja excluir fornecedor: {{$fornecedor->nome}}')"><span class="glyphicon glyphicon-remove"></span> Excluir</a>
 								</td>
 
 							</tr>
@@ -126,6 +133,7 @@
 		</div>
 		
 	</div>
+</div>
 </div>
 
 

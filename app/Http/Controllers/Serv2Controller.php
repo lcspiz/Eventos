@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Serv2;
 use App\Serv1;
+use App\SubServ;
 use Session;
 
 class Serv2Controller extends Controller
@@ -14,7 +15,7 @@ class Serv2Controller extends Controller
    public function index()
     {
         //
-    $serv2 = DB::table('serv2')->orderBy('codserv1','ASC')->orderBy('codigo','ASC')->simplePaginate(3);
+    $serv2 = DB::table('subserv')->whereNull('codserv3')->orderBy('codserv1','ASC')->orderBy('codserv2','ASC')->get();
 
     return view('serv2')->with('serv2',$serv2);
         
@@ -32,14 +33,13 @@ class Serv2Controller extends Controller
 
     	$serv1desc = DB::table('serv1')->where('codigo',"=",$request->codserv1)->get()->first();
 
+        $codserv1 = $request->codserv1;
+        $descserv1 = $serv1desc->descricao;
+        $codserv2 = $request->codigo;
+        $descserv2 = $request->descricao;
+        $valorserv2 = $request->valor;
 
-    	$serv2 = Serv2::create([
-    		'codserv1' => $request->codserv1,
-    		'descserv1' => $serv1desc->descricao,
-            'codigo' => $request->codigo,
-            'descricao' => $request->descricao,
-            'valor' => $request->valor,
-        ]);
+        $servfornec = DB::insert('insert into subserv (codserv1,descserv1,codserv2,descserv2,valorserv2) values(?,?,?,?,?)',[$codserv1,$descserv1,$codserv2,$descserv2,$valorserv2]);
 
         return redirect()->route('serv2');
     }
@@ -49,22 +49,22 @@ class Serv2Controller extends Controller
     	
     	$serv1 = DB::table('serv1')->orderBy('codigo')->get();
 
-    	$serv2edit = Serv2::where('codigo','=',$id)->first();
+    	$serv2 = DB::table('subserv')->where('codserv2',"=",$id)->first();
 
-        return view('serv2edit')->with('serv2',$serv2edit)->with('servicos1',$serv1);
+        return view('serv2edit')->with('serv2',$serv2)->with('servicos1',$serv1);
     }
 
     public function update(Request $request, $id){
 
-            $serv2edit = Serv2::where('codigo','=',$id)->first();
             $serv1desc = DB::table('serv1')->where('codigo',"=",$request->codserv1)->get()->first();
 
-            $serv2edit->descserv1 = $serv1desc->descricao;
-            $serv2edit->codserv1 = $request->codserv1;
-            $serv2edit->codigo = $request->codigo;
-            $serv2edit->descricao = $request->descricao;
+            $descserv1 = $serv1desc->descricao;
+            $codserv1 = $request->codserv1;
+            $codserv2 = $request->codigo;
+            $descserv2 = $request->descricao;
+            $valorserv2 = $request->valor;
 
-            $serv2edit->save();
+            $serv2update = DB::table('subserv')->where('codserv2',$id)->update(['codserv1'=>$codserv1,'descserv1'=>$descserv1,'codserv2'=>$codserv2,'descserv2'=>$descserv2,'valorserv2'=>$valorserv2]);
 
             Session::flash('success','Serviço editado com sucesso!');
 
@@ -74,8 +74,10 @@ class Serv2Controller extends Controller
 
     public function delete($id){
 
-    	$serv1delete = Serv2::where('codigo','=',$id)->first();
-        $serv1delete->delete();
+
+        $serv2 = DB::table('subserv')->where('codserv2',$id)->delete();
+
+        Session::flash('success','Serviço excluido.');
 
         return redirect()->route('serv2');
     }

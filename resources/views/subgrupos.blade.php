@@ -6,9 +6,9 @@
 	<div class="container">
 	<div class="panel panel-default">
 	<div class="panel-heading"><h3 class="panel-title pull-left">
-					Manutenção de Serviços Nv.2</h3>
-	 <a href="{{route('serv2.create')}}" type="button" class="btn btn-success pull-right">
-	 	<span class="glyphicon glyphicon-plus"></span> Novo Serviço Nv.2
+					Manutenção de Sub-Grupos</h3>
+	 <a href="{{route('subgrupos.create')}}" type="button" class="btn btn-success pull-right">
+	 	<span class="glyphicon glyphicon-plus"></span> Novo Sub-Grupo
 	 </a>
         <div class="clearfix"></div>
     </div>
@@ -20,19 +20,15 @@
 
 					<thead>
 						<th>
-							Código Nv1
+							Código Grupo
 						</th>
 
 						<th>
-							Descrição Nv1
+							Código Sub-Grupo
 						</th>
 
 						<th>
-							Código Nv2
-						</th>
-
-						<th>
-							Descrição Nv2
+							Descrição
 						</th>
 
 						<th>
@@ -52,34 +48,32 @@
 
 					<tbody>
 
-						@foreach ($serv2 as $serv)
+						@foreach ($subgrupos as $subgrupo)
 							<tr>
 								<td>
-									{{$serv->codserv1}}
-								</td>
-								<td>
-									{{$serv->descserv1}}
-								</td>
-								<td>
-									{{$serv->codserv2}}
+									{{$subgrupo->id_grupo}}
 								</td>
 
 								<td>
-								{{$serv->descserv2}}
+									{{$subgrupo->id_subgrupo}}
 								</td>
 
 								<td>
-									{{$serv->valorserv2}}
+								{{$subgrupo->descricao}}
+								</td>
+
+								<td>
+									{{$subgrupo->valor}}
 								</td>
 						
 								<td>
-									<a href="{{route('serv2.edit',['id'=> $serv->codserv2])}}" class="btn btn-xs btn-success">
+									<a href="{{route('subgrupos.edit',['id'=> $subgrupo->id])}}" class="btn btn-xs btn-success">
 										<span class="glyphicon glyphicon-edit"></span> Editar 
 									</a>
 								</td>
 
 								<td>
-									<a href="{{route('serv2.delete',['id'=> $serv->codserv2])}}" class="btn btn-xs btn-danger">
+									<a href="{{route('subgrupos.delete',['id'=> $subgrupo->id])}}" class="btn btn-xs btn-danger">
 										<span class="glyphicon glyphicon-remove"></span> Excluir
 									</a>
 								</td>

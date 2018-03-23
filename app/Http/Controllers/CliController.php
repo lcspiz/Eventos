@@ -19,7 +19,7 @@ class CliController extends Controller
     public function index()
     {
         //
-        $clientes = DB::table('clientes')->get();
+        $clientes = DB::table('clientes')->orderBy('id')->get();
 
         return view('cliente')->with('clientes',$clientes);
     }

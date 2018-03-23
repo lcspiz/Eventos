@@ -2,63 +2,15 @@
 
 @section('content')
 <style type="text/css">
-	.form-inline{
-		padding-left: 30px;
-	}
-	.panel-heading h3 {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: normal;
-    width: 80%;
-    padding-top: 8px;
 
-    .tab {
-    float: left;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-    width: 30%;
-    height: 300px;
+.mygrid-wrapper-div {
+    overflow: scroll;
+    height: 400px;
 }
 
-/* Style the buttons inside the tab */
-.tab button {
-    display: block;
-    background-color: inherit;
-    color: black;
-    padding: 22px 16px;
-    width: 100%;
-    border: none;
-    outline: none;
-    text-align: left;
-    cursor: pointer;
-    transition: 0.3s;
-    font-size: 17px;
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-    background-color: #ddd;
-}
-
-/* Create an active/current "tab button" class */
-.tab button.active {
-    background-color: #ccc;
-}
-
-/* Style the tab content */
-.tabcontent {
-    float: left;
-    padding: 0px 12px;
-    border: 1px solid #ccc;
-    width: 70%;
-    border-left: none;
-    height: 300px;
-}
-}	
 </style>
 
-	<div class="container">
+<div class="container">
 	<div class="panel panel-default">
 	<div class="panel-heading"><h3 class="panel-title pull-left">
 					Manutenção de Clientes</h3>
@@ -77,7 +29,7 @@
 <form class="form-inline" action="{{route('cliente.pesquisa')}}" style="float:left">
 		<label for="nome">Código:</label>
 		<input type="numeric" type="submit" name="codigo" class="form-control">
-		<button type="submit" class="btn btn-btn-success">
+		<button type="submit" class="btn btn-info">
 			<span class="glyphicon glyphicon-search"></span> Pesquisar</button>
 		&nbsp;
 </form>
@@ -85,10 +37,11 @@
 <form class="form-inline" action="{{route('cliente.searchMatch')}}">
 		<label for="nome">Nome, CNPJ, Fantasia:</label>
 		<input type="text" type="submit" name="query" class="form-control">
-		<button type="submit" class="btn btn-btn-success"><span class="glyphicon glyphicon-search"></span> Pesquisar</button>
+		<button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-search"></span> Pesquisar</button>
 </form>
-		<div class="panel-body">
 
+		<div class="panel-body">
+			<div class="mygrid-wrapper-div">
 			<table class="table table-striped">
 
 					<thead>
@@ -110,10 +63,6 @@
 						<th>
 							Fone 1
 						</th>
-						<th>
-							Fone 2
-						</th>
-
 						<th>
 							Cidade
 						</th>
@@ -147,11 +96,6 @@
 								<td>
 									{{$cliente->fone1}}
 								</td>
-
-								<td>
-									{{$cliente->fone2}}
-								</td>
-
 								<td>
 									{{$cliente->cidade}}
 								</td>
@@ -173,10 +117,7 @@
 				</table>
 			
 		</div>
-		
 	</div>
-</div>
-
 @stop
 
 

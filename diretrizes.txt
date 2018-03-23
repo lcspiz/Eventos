@@ -1,32 +1,39 @@
-Clientes
+MODULO DE CASTING
 
-Pesquisa: Código, Nome, Nome Fantasia, CNPJ
+tabelas
+Casting{
+	Codigo
+	Nome
+	S.Nome
+	Nascimento
+	idade
+	Ativo (boolean)
+	Fone res
+	celular
+	Celular 2
+	sexo (M ou F)
+	Endereço
+	Numero
+	complemento
+	Bairro
+	CEP
+	cidade
+	Estado
+	Classificação (A,B,C,D,E)
+	RG
+	CPF
+	Est.Civil
+	Banco
+	Agencia
+	Conta(CC ou PP)
+	Titular
+	CPF Conta
+	email
+	email sec
+	Social Media
+	Contato
+	Apelido
+	Fotos
 
-Front: Codigo, nome, fantasia, CNPJ/CPF, Fone1, Fone2, Cidade
+}
 
-Campos: Codigo(primary key), CNPJ/CPF(14), RG(char 20), Nome(char 40), email(char 60), Endereço(char 40),numero(char 11), cep(char 9), complemento(char 20), bairro(char 30), Cidade(30), UF(2), fone1(char 15), fone2(char 15), Celular(char 15), Fantasia(char 30), site(char 40), observação(longtext), banco, agencia, conta, tipo(poupança, conta corrente), titular(char 40), cpfconta(14),codempresa(1),codfilial(1)
-
-Fornecedores
-
-Pesquisa: Código, Nome, Nome Fantasia, CNPJ
-
-Front: Codigo, nome, fantasia, CNPJ/CPF, Fone1, Fone2, Cidade
-
-Campos: Codigo(primary key), CNPJ/CPF(14), RG(char 20), Nome(char 40), email(char 60), Endereço(char 40),numero(char 11), cep(char 9), complemento(char 20), bairro(char 30), Cidade(30), UF(2), fone1(char 15), fone2(char 15), Celular(char 15), Fantasia(char 30), site(char 40), observação(longtext), banco, agencia, conta, tipo(poupança, conta corrente), titular, cpfconta,codempresa(1),codfilial(1)
-
-Contatos
-
-Nome, cargo, email, fone, observação
-
-
-Contato belongsTo Cliente
-Cliente hasMany Contato
-
-
-Contato belongsTo Fornecedor
-Fornecedor hasMany Contato
-
-
-Vendedor
-
-Fornecedor + percentual de comissão

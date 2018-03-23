@@ -6,7 +6,7 @@
 		padding-left: 30px;
 	}
 </style>
-<form action="{{route('serv2.store')}}" method="post">
+<form action="{{route('serv3.store')}}" method="post">
 	<div class="container">
 	<div class="panel panel-default">
 	<div class="panel-heading">Cadastro de Serviços Nv.3</div>

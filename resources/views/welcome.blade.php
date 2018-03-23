@@ -89,6 +89,77 @@
               background-color: #0000000;
             }
 
+              .form-inline{
+                padding-left: 8px;
+              }
+              .panel-heading h3 {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-height: normal;
+                width: 80%;
+                padding-top: 8px;
+            } 
+
+              .mygrid-wrapper-div {
+                overflow: scroll;
+                height: 500px;
+            }
+              .form-inline{
+    padding-left: 30px;
+  }
+  .panel-heading h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: normal;
+    width: 80%;
+    padding-top: 8px;
+
+    .tab {
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 30%;
+    height: 300px;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    float: left;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    width: 70%;
+    border-left: none;
+    height: 300px;
+}
+} 
+
            
         </style>
     </head>
@@ -106,7 +177,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manutenções<span class="caret"></span></a>
           <ul class="dropdown-menu">
-              <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Casting</a></li>
+              <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('castings')}}">Casting</a></li>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('clientes')}}">Clientes</a></li>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('fornecedores')}}">Fornecedor</a></li>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('vendedores')}}">Vendedor</a></li>
@@ -116,8 +187,8 @@
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('serv1')}}">Serviços Nv 1</a></li>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('serv2')}}">Serviços Nv 2</a></li>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('serv3')}}">Serviços Nv 3</a></li>
-              <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Grupos</a></li>
-              <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Sub Grupos</a> </li>
+              <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('grupos')}}">Grupos</a></li>
+              <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('subgrupos')}}">Sub Grupos</a> </li>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Item</a></li>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Usuários</a></li>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Logout</a></li>
@@ -139,8 +210,8 @@
       <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Processos<span class="caret"></span></a>
           <ul class="dropdown-menu">
-              <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Seleciona Casting</a>
-              <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Seleciona Fornecedor</a>
+              <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('casting.selecionacasting')}}">Seleciona Casting</a>
+              <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('fornecedor.selecionafornec')}}">Seleciona Fornecedor</a>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Processa Pagamentos</a>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Orçamentos</a>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Casting Atualização Mailing</a> 
@@ -221,6 +292,7 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+          <!-- /Alertas Bootstrap -->
         <div class="container">
                    @if(Session::has('success'))
             <div class="alert alert-success fade in" role="alert">
@@ -234,8 +306,9 @@
             </div>
                 @endif
 
-<script type="text/javascript">
 
+<script type="text/javascript">
+  //Fade Out Alertas
             $(document).ready(function () {
              
             window.setTimeout(function() {

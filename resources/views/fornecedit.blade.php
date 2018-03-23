@@ -8,7 +8,9 @@
 </style>
 <form action="{{route('fornecedor.update',['id'=> $fornecedor->id])}}" method="post">
 	<div class="panel panel-default">
-	<div class="panel-heading">Editar Fornecedor: {{$fornecedor->nome}}</div>
+	<div class="panel-heading">Editar Fornecedor: {{$fornecedor->nome}}
+		
+        <div class="clearfix"></div></div>
 	<div class="form-group">
 		{{ csrf_field() }}
 
@@ -183,6 +185,111 @@
 						@endforeach
 
 					</tbody>
+				</table>
+			
+		</div>
+		
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="panel panel-default">
+	<div class="panel-heading"><h3 class="panel-title pull-left">
+					Serviços Cadastrados</h3><a href="{{route('servico_fornecedor.index',['id'=> $fornecedor->id])}}" type="button" class="btn btn-default pull-right">Novo Serviço</a>
+        <div class="clearfix"></div>
+    </div>
+<p></p>
+
+		<div class="panel-body">
+
+			<table class="table table-striped">
+
+					<thead>
+						<th>
+							Código Nv1
+						</th>
+
+						<th>
+							Descrição Nv1
+						</th>
+
+						<th>
+							Código Nv2
+						</th>
+
+						<th>
+							Descrição Nv2
+						</th>
+
+						<th>
+							Valor Nv2
+						</th>
+
+		     			<th>
+							Código Nv3
+						</th>
+
+						<th>
+							Descrição Nv3
+						</th>
+
+						<th>
+							Valor Nv3
+						</th>
+
+						<th>
+							Remover
+						</th>
+
+
+					</thead>
+
+					<tbody>
+
+						@foreach ($servfornec as $serv)
+
+							<tr>
+								<td>
+									{{$serv->codserv1}}
+								</td>
+								<td>
+									{{$serv->descserv1}}
+								</td>
+								<td>
+									{{$serv->codserv2}}
+								</td>
+								<td>
+									{{$serv->descserv2}}
+								</td>
+								<td>
+									{{$serv->valorserv2}}
+								</td>
+								<td>
+									{{$serv->codserv3}}
+								</td>
+
+								<td>
+								{{$serv->descserv3}}
+								</td>
+
+								<td>
+									{{$serv->valorserv3}}
+								</td>
+
+								<td>
+									@if($serv->codserv3 == null)
+									<a href="{{route('servico_fornecedor.delete2', ['id'=> $serv->codserv2, 'idfornec' => $fornecedor->id])}}" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-remove"></span> Remover</a>
+									@else
+									<a href="{{route('servico_fornecedor.delete3', ['id'=> $serv->codserv3, 'idfornec' => $fornecedor->id])}}" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-remove"></span> Remover</a>
+									@endif
+								</td>
+
+							</tr>
+
+					</tbody>
+					@endforeach
+
 				</table>
 			
 		</div>
