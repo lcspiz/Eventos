@@ -187,4 +187,11 @@ public function search(Request $request){
 
 
 }
+
+public function getNome($id){
+    $cliente = DB::table("clientes")->where("id",$id)->pluck("nome");
+
+        return json_encode($cliente);
+}
+
 }

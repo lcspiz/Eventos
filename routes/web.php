@@ -104,6 +104,8 @@ Route::get('clientes/pesquisa/', [
 		'as' => 'cliente.pesquisa'
 ]);
 
+Route::get('clientes/get/{id}', ['uses' => 'CliController@getNome']);
+
 //Rotas de Fornecedores
 
 Route::get('fornecedores/', [
@@ -604,3 +606,86 @@ Route::get('subgrupos/delete/{id}', [
 		'uses' => 'SubGruposController@delete',
 		'as' => 'subgrupos.delete'
 ]);
+
+Route::get('subgrupos/get/{id}', ['uses' => 'SubGruposController@getSubgrupo']);
+
+//rotas de items
+
+Route::get('items/', [
+
+		'uses' => 'ItemsController@index',
+		'as' => 'items'
+]);
+
+Route::get('items/create', [
+
+		'uses' => 'ItemsController@create',
+		'as' => 'items.create'
+]);
+
+Route::post('items/store', [
+
+		'uses' => 'ItemsController@store',
+		'as' => 'items.store'
+]);
+
+Route::get('items/edit/{id}', [
+
+		'uses' => 'ItemsController@edit',
+		'as' => 'items.edit'
+]);
+
+Route::post('items/update/{id}', [
+
+		'uses' => 'ItemsController@update',
+		'as' => 'items.update'
+]);
+
+Route::get('items/delete/{id}', [
+
+		'uses' => 'ItemsController@delete',
+		'as' => 'items.delete'
+]);
+
+Route::get('items/get/{grupo}/{subgrupo}', ['uses' => 'ItemsController@getItem']);
+Route::get('items/getvalor/{grupo}/{subgrupo}/{item}', ['uses' => 'ItemsController@getValor']);
+
+//rotas de orçamentos
+
+Route::get('orcamentos/', [
+
+		'uses' => 'OrcamentosController@index',
+		'as' => 'orcamentos'
+]);
+
+Route::get('orcamentos/edit/{id}',[
+
+		'uses' => 'OrcamentosController@edit',
+		'as' => 'orcamentos.edit'
+]);
+
+Route::post('orcamentos/update/{id}', [
+
+		'uses' => 'OrcamentosController@update',
+		'as' => 'orcamentos.update'
+]);
+
+Route::get('orcamentos/create', [
+
+		'uses' => 'OrcamentosController@create',
+		'as' => 'orcamentos.create'
+]);
+
+Route::post('orcamentos/store', [
+
+		'uses' => 'OrcamentosController@store',
+		'as' => 'orcamentos.store'
+]);
+
+Route::get('orcamentos/delete/{id}', [
+
+		'uses' => 'OrcamentosController@delete',
+		'as' => 'orcamentos.delete'
+]);
+
+Route::post('salvaItem', 'OrcamentosController@salvaItem');

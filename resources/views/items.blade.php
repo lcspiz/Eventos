@@ -6,9 +6,9 @@
 	<div class="container">
 	<div class="panel panel-default">
 	<div class="panel-heading"><h3 class="panel-title pull-left">
-					Manutenção de Sub-Grupos</h3>
-	 <a href="{{route('subgrupos.create')}}" type="button" class="btn btn-success pull-right">
-	 	<span class="glyphicon glyphicon-plus"></span> Novo Sub-Grupo
+					Manutenção de Items</h3>
+	 <a href="{{route('items.create')}}" type="button" class="btn btn-success pull-right">
+	 	<span class="glyphicon glyphicon-plus"></span> Novo Item
 	 </a>
         <div class="clearfix"></div>
     </div>
@@ -26,6 +26,10 @@
 						<th>
 							Sub-Grupo
 						</th>
+						<th>
+							Código Item
+						</th>
+
 
 						<th>
 							Descrição
@@ -48,32 +52,35 @@
 
 					<tbody>
 
-						@foreach ($subgrupos as $subgrupo)
+						@foreach ($items as $item)
 							<tr>
 								<td>
-									{{$subgrupo->descgrupo}}
+									{{$item->descgrupo}}
 								</td>
 
 								<td>
-									{{$subgrupo->id_subgrupo}}
+									{{$item->descsubgrupo}}
+								</td>
+								<td>
+									{{$item->item}}
 								</td>
 
 								<td>
-								{{$subgrupo->descricao}}
+								{{$item->descricao}}
 								</td>
 
 								<td>
-									{{$subgrupo->valor}}
+									{{$item->valor}}
 								</td>
 						
 								<td>
-									<a href="{{route('subgrupos.edit',['id'=> $subgrupo->id])}}" class="btn btn-xs btn-success">
+									<a href="{{route('items.edit',['id'=> $item->id])}}" class="btn btn-xs btn-success">
 										<span class="glyphicon glyphicon-edit"></span> Editar 
 									</a>
 								</td>
 
 								<td>
-									<a href="{{route('subgrupos.delete',['id'=> $subgrupo->id])}}" class="btn btn-xs btn-danger">
+									<a href="{{route('items.delete',['id'=> $item->id])}}" class="btn btn-xs btn-danger">
 										<span class="glyphicon glyphicon-remove"></span> Excluir
 									</a>
 								</td>

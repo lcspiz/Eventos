@@ -4,11 +4,9 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="{{asset('jquery.mask.js')}}"></script>
 <script src="{{asset('mascaras.js')}}"></script>
 
@@ -189,7 +187,7 @@
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('serv3')}}">Serviços Nv 3</a></li>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('grupos')}}">Grupos</a></li>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('subgrupos')}}">Sub Grupos</a> </li>
-              <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Item</a></li>
+              <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('items')}}">Item</a></li>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Usuários</a></li>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Logout</a></li>
             </li>
@@ -213,7 +211,7 @@
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('casting.selecionacasting')}}">Seleciona Casting</a>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('fornecedor.selecionafornec')}}">Seleciona Fornecedor</a>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Processa Pagamentos</a>
-              <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Orçamentos</a>
+              <li class="dropdown-toggle"><a class="test" tabindex="-1" href="{{route('orcamentos')}}">Orçamentos</a>
               <li class="dropdown-toggle"><a class="test" tabindex="-1" href="#">Casting Atualização Mailing</a> 
             </li>
           </ul>

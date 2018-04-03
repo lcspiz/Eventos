@@ -12,7 +12,9 @@ class SubGruposController extends Controller
     public function index()
     {
         //
-    $subgrupos = DB::table('subgrupos')->orderBy('id_grupo','ASC')->orderBy('id','ASC')->get();
+    $subgrupos = DB::table('subgrupos')->join('grupos','subgrupos.id_grupo','=','grupos.codigo')
+    ->select('subgrupos.*','grupos.descricao as descgrupo','subgrupos.descricao')
+    ->orderBy('id_grupo','ASC')->orderBy('id','ASC')->get();
 
     return view('subgrupos')->with('subgrupos',$subgrupos);
         
@@ -71,5 +73,12 @@ class SubGruposController extends Controller
         Session::flash('success','Subgrupo excluido.');
 
         return redirect()->route('subgrupos');
+    }
+
+    public function getSubgrupo($id){
+
+        $subgrupos = DB::table("subgrupos")->where("id_grupo",$id)->orderBy('id_subgrupo')->pluck("id_subgrupo","descricao");
+
+        return json_encode($subgrupos);
     }
 }

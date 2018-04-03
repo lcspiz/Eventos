@@ -1,39 +1,21 @@
-MODULO DE CASTING
+CRUD Orçamentos
+CRUD OrçamentosValores
 
-tabelas
-Casting{
-	Codigo
-	Nome
-	S.Nome
-	Nascimento
-	idade
-	Ativo (boolean)
-	Fone res
-	celular
-	Celular 2
-	sexo (M ou F)
-	Endereço
-	Numero
-	complemento
-	Bairro
-	CEP
-	cidade
-	Estado
-	Classificação (A,B,C,D,E)
-	RG
-	CPF
-	Est.Civil
-	Banco
-	Agencia
-	Conta(CC ou PP)
-	Titular
-	CPF Conta
-	email
-	email sec
-	Social Media
-	Contato
-	Apelido
-	Fotos
 
-}
+POP-overs para descrição dos itens
+https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_popover_pos&stacked=h
 
+
+
+Engine de Pesquisa Bootstrap
+https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_filters_table&stacked=h
+
+Nginx
+https://serversforhackers.com/c/lemp-nginx-php-laravel
+
+
+Calculos
+Custo total = qtde * dias * custo unitario
+valor total = qtde * dias * valor unitário 
+rentabilidade = valor total - custo unitário
+porcentagem = (valor total / custo total) * 100

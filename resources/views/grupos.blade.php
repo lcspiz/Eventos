@@ -38,7 +38,7 @@
                         @foreach($grupos as $grupo)
                             <tr>
                                 <td>
-                                {{$grupo->id}}
+                                {{$grupo->codigo}}
                                 </td>
                                 <td>
                                     {{$grupo->descricao}}
