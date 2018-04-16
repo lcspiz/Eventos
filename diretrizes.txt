@@ -19,3 +19,6 @@ Custo total = qtde * dias * custo unitario
 valor total = qtde * dias * valor unitário 
 rentabilidade = valor total - custo unitário
 porcentagem = (valor total / custo total) * 100
+
+
+https://stackoverflow.com/questions/3796880/what-is-cobol-used-for?rq=1

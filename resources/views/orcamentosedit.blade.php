@@ -7,12 +7,39 @@
 	}
 
 		textarea.form-control {
-		padding-left: 5px;
+		padding-left: 10px;
  		height: 100%;
   		width: 95%;
 }
 
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
 </style>
+
 <form action="{{route('orcamentos.update',['id'=> $orcamento->id])}}" method="post">
 	<div class="panel panel-default">
 	<div class="panel-heading">Editar Orçamento: {{$orcamento->orcamento}}</div>
@@ -21,9 +48,14 @@
 	<div class="container">
 		<div class="form-inline">
 			<p></p>
-			<input type="hidden" name="id_orcamento" id="id_orcamento" value="{{$orcamento->orcamento}}">
+			<input type="hidden" name="orcamento" id="orcamento" value="{{$orcamento->orcamento}}">
+			<input type="hidden" name="id_orcamento" id="id_" value="{{$orcamento->orcamento}}">
+
 			<label for="nome">Cliente:</label>
 			<input type="text" readonly name="id_cliente" id="id_cliente" maxlength="5" size="5" class="form-control" value="{{$orcamento->cliente}}">
+			&nbsp;
+			<label for="nome">Versão:</label>
+			<input type="text" readonly name="versao" id="versao" size="1" class="form-control" value="{{$orcamento->versao}}">
 			&nbsp;
 			<input type="text" name="cliente" id="cliente" size="60" class="form-control" readonly>
 			&nbsp;
@@ -55,7 +87,7 @@
 			<input type="text" maxlength="5" size="5" name="hr_inicio" id="hrinicio" class="form-control" value="{{$orcamento->hr_inicio}}">
 			&nbsp;
 			<label for="nome">Dt.Final:</label>
-			<input type="text" size="10" maxlength="10" name="dtentrega" id="dtentrega" class="form-control" value="{{$orcamento->dt_final}}">
+			<input type="text" size="10" maxlength="10" name="dtfinal" id="dtfinal" class="form-control" value="{{$orcamento->dt_final}}">
 			&nbsp;
 			<label for="nome">Hora:</label>
 			<input type="text" maxlength="5" size="5" name="hr_final" id="hr_final" class="form-control" value="{{$orcamento->hr_final}}">
@@ -108,7 +140,7 @@
 				<label for="nome">Observação:</label>
 				<textarea class="form-control" name="observacao" rows="4">{{$orcamento->descricao}}</textarea>
 				<p></p>
-				<button id="orcamentocad" class="btn btn-primary btn-sm col-md-1 col-md-offset-5">Editar</button>
+				<button id="orcamentocad" type="submit" class="btn btn-primary btn-sm col-md-1 col-md-offset-5">Editar</button>
 			</div>
 		</div>
 
@@ -178,10 +210,18 @@
 				<label for="nome">%:</label>
 				<input type="text" size="8" name="porcent" id="porcent" class="form-control" readonly>
 				&nbsp;
-				<button id="cadastrar" class="btn btn-btn-success">Incluir Item</button>
+				<button id="cadastrar" class="btn btn-info">Gravar</button>
+				</div>
+	</div>
+
+	<div class="container">
+			<div class="form-group">
+				<p></p>
+				<label for="nome">Observação do item:</label>
+				<textarea class="form-control" name="obsitem" id="obsitem" rows="4"></textarea>
 				<p></p>
 			</div>
-	</div>
+		</div>
 
 	<div class="panel-body">
 		<div class="mygrid-wrapper-div">
@@ -202,6 +242,9 @@
 
 						<th>
 							Descrição do Item
+						</th>
+						<th>
+							Obs.
 						</th>
 
 						<th>
@@ -228,6 +271,12 @@
 						<th>
 							%
 						</th>
+						<th>
+							Editar
+						</th>
+						<th>
+							Excluir
+						</th>
 
 
 					</thead>
@@ -247,8 +296,12 @@
 </div>
 
 <script type="text/javascript">
-    $('#codgrupo').change(function(){
-    codgrupo = $(this).val();    
+    $('#codgrupo').bind("click",function(){
+    codgrupo = $(this).val();
+    getSubgrupo(codgrupo);
+   });
+
+function getSubgrupo(codgrupo){
     if(codgrupo){
         $.ajax({
         type: "GET",
@@ -278,11 +331,17 @@
     }else{
         $("#codsubgrupo").empty();
         $("#valor").val('');
-    }      
-   });
-   $('#codsubgrupo').change(function(){
+    } 
+
+}
+
+   $('#codsubgrupo').bind("change",function(){
     codsubgrupo = $(this).val();    
-    if(codsubgrupo){
+    getItem(codsubgrupo);
+   });
+
+function getItem(codsubgrupo){
+	    if(codsubgrupo){
         $.ajax({
         type: "GET",
 		async: true,
@@ -306,11 +365,17 @@
     }else{
         $("#item").empty();
         $("#valor").val('');
-    }      
-   });
-   $('#item').change(function(){
+    } 
+}
+
+
+$('#item').change(function(){
     item = $(this).val();    
-    if(item){
+	getValor(item);    
+});
+
+function getValor(){
+	    if(item){
         $.ajax({
         type: "GET",
 		async: true,
@@ -332,17 +397,15 @@
         });
     }else{
         $("#valor").empty();
-    }      
-   });
+    }  
+}
 
 
 
-
-   $( "#cadastrar" ).click(function() {
-
+$( "#cadastrar" ).click(function() {
    	var trHTML = '';
+   	var id_orcamento = {{$orcamento->id}};
    	var grupo = document.getElementById('codgrupo').value;
-   	var cliente = document.getElementById('id_cliente').value;
    	var subgrupo = document.getElementById('codsubgrupo').value;
    	var item = document.getElementById('item').value;
  	var descitem = $( "#item option:selected" ).text();
@@ -350,11 +413,11 @@
  	var dias = document.getElementById('dias').value;
  	var custoun = document.getElementById('custoun').value;
  	var custotot = document.getElementById('custotot').value;
- 	var id_orcamento = document.getElementById('id_orcamento').value;
  	var valun = document.getElementById('valorun').value;
  	var valortot = document.getElementById('valortot').value;
  	var rentabilidade = document.getElementById('rentabilidade').value;
  	var porcent = document.getElementById('porcent').value;
+ 	var obsitem = $.trim($('#obsitem').val());
 
  	$.ajaxSetup({
     headers: {
@@ -364,35 +427,80 @@
 
  	  $.ajax({
         type: "POST",
-		data: "codgrupo=" + grupo + "&codsubgrupo=" + subgrupo + "&item=" + item + "&descitem=" + descitem + "&qtde=" + qtde + "&id_cliente=" + cliente + "&orcamento="+ id_orcamento + "&valortot=" + valortot + "&rentabilidade=" + rentabilidade + "&porcent=" + porcent,
+		data: "codgrupo=" + grupo + "&codsubgrupo=" + subgrupo + "&item=" + item + "&descitem=" + descitem + "&qtde=" + qtde + "&valortot=" + valortot + "&rentabilidade=" + rentabilidade + "&porcent=" + porcent + "&id_orcamento=" + id_orcamento + "&dias=" + dias + "&custoun=" + custoun + "&custotot=" + custotot + "&valorun=" + valun + "&obsitem=" + obsitem, 
 		url: "/salvaItem",
-           success:function(data){               
-           		console.log(data);
+           success:function(data){  
+           		$("td").empty();
+           		getItems();
+
             }
            
         });
-
-
-  	trHTML += '<tr><td>' + grupo + 
-  	'</td><td>' + codsubgrupo + 
-  	'</td><td>' + item + 
-  	'</td><td>' + descitem + 
-  	'</td><td>' + qtde +
-  	'</td><td>' + dias + 
-  	'</td><td>' + custoun + 
-  	'</td><td>' + custotot +
-  	'</td><td>' + valun + 
-  	'</td><td>' + valortot +
-  	'</td><td>' + rentabilidade + 
-  	'</td><td>' + porcent +
-
-  	'</td></tr>';
-
-
-  	$('#orcamento').append(trHTML);
-
+ 	
 });
+
+function getItems(){
+    	$.ajax({
+        type: "GET",
+        async: true,
+		dataType: 'json',
+		url: "{{action('OrcamentosController@getItems',['id'=>$orcamento->id])}}",
+           success:function(data){    
+           html = '';       
+		   console.log(data);
+		   for(var i=0; i < data.length; i++){
+		   	var editB = "<button onclick="+ 'editItem('+data[i].id+')' +" class=" + 'btn-success' + " >Editar</td>";
+		   	var deleteB = "<button onclick="+ 'deleteItem('+data[i].id+')' +" class=" + 'btn-danger' + " >Excluir</td>";  
+		   		html += '<tr>'+
+                '<td>' + data[i].grupo + '</td>' +
+                '<td>' + data[i].subgrupo + '</td>' +
+                '<td>' + data[i].item + '</td>' +
+                '<td>' + data[i].descitem + '</td>' +
+                '<td><a data-toggle="tooltip" title="'+ data[i].obsitem + '">Info</a></td>' +
+                '<td>' + data[i].qtde + '</td>' +
+                '<td>' + data[i].dias + '</td>' +
+                '<td>' + data[i].custoun + '</td>' +
+                '<td>' + data[i].custotot + '</td>' +
+                '<td>' + data[i].valorun + '</td>' +
+                '<td>' + data[i].valortot + '</td>' +
+                '<td>' + data[i].rentabilidade + '</td>' +
+                '<td>' + data[i].porcent + '</td>' +
+                '<td>' + editB + 
+                '<td>' + deleteB
+		   }   
+		   $('#orcamento tr').first().after(html); 
+           }
+        });
+    }
+function editItem(id) {
+	$.ajax({
+        type: "GET",
+        async: false,
+		dataType: 'json',
+		url: "/editItem/" + id,
+		success:function(data){
+			$("#codgrupo").val(data.grupo);
+
+		}
+});
+}
+
+function deleteItem(id) {
+		$.ajax({
+        type: "GET",
+        async: true,
+		dataType: 'json',
+		url: "/deleteItem/" + id,
+		success:function(data){
+			$("td").empty();
+			getItems();
+		}
+});
+}
+
 $(document).ready(function(){
+	$('[data-toggle="tooltip"]').tooltip();
+   getItems();
    var cliente = document.getElementById('id_cliente').value;
     if(cliente){
         $.ajax({
@@ -416,7 +524,7 @@ $(document).ready(function(){
         });
     }else{
         $("#cliente").empty();
-    }  
+    }
 
     function custoTotal() {
           var qtde = $('#qtde').val();
@@ -451,19 +559,14 @@ $(document).ready(function(){
           var custotot = $('#custotot').val();
           var valortot = $('#valortot').val();
           var porcent = (custotot / valortot) * 100;
-          $('#porcent').val(porcent);
+          var result = Math.round(porcent*100)/100
+          $('#porcent').val(result);
         } 
 
         $('#qtde, #dias, #valorun').keyup(porcent);
 
 });
-
-
-
         
-
-
-
 
 </script>
 

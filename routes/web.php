@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 //Rotas de Contas
 
+
 Route::get('contas/', [
 
 		'uses' => 'ContaCorrenteController@index',
@@ -689,3 +690,7 @@ Route::get('orcamentos/delete/{id}', [
 ]);
 
 Route::post('salvaItem', 'OrcamentosController@salvaItem');
+Route::get('getItems/{id}', 'OrcamentosController@getItems');
+Route::get('/editItem/{id}', 'OrcamentosController@editItem');
+Route::get('/deleteItem/{id}', 'OrcamentosController@deleteItem');
+

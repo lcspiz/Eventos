@@ -7,9 +7,10 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 <script src="{{asset('jquery.mask.js')}}"></script>
 <script src="{{asset('mascaras.js')}}"></script>
-
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <title>Eventos</title>
 
@@ -303,23 +304,12 @@
                 {{session('error')}}
             </div>
                 @endif
+        
 
-
-<script type="text/javascript">
-  //Fade Out Alertas
-            $(document).ready(function () {
-             
-            window.setTimeout(function() {
-                $(".alert").fadeTo(1000, 0).slideUp(200, function(){
-                    $(this).remove(); 
-                });
-            }, 1500);
-             
-            });
-
-</script>
 
 @yield('content')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@include('sweet::alert')
 
     </body>
 </html>
